@@ -1,28 +1,30 @@
-var slide;
-slider();
-async function slider() {
+var thread;
+startSlider();
+async function startSlider() {
 
-    let doc = document.querySelector('slider');
+    let slider = document.querySelector('slider');
+    let itens = slider.querySelectorAll('slide');
+    slider.outerHTML = '<slider-frame>'+slider.outerHTML+'</slider-frame>';
+    slider = document.querySelector('slider')
+    //slider.outerHTML += "<slider-frame></slider-frame>";
+    let frame = document.querySelector('slider-frame');
+    var index = 1;
+    var max = itens.length //slider.style.getPropertyValue('--total-items');
 
-    let itens = doc.querySelectorAll('slide')
+    console.log(slider)
 
-    var index = 0;
-    var max = itens.length //doc.style.getPropertyValue('--total-items');
+    slider.style = "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:"+(itens.length)+";width: calc(var(--total-items) * 100%);--index: 0;left: calc(var(--index)*-100%);transition: left 1s;"
+    var millisecondsToWait = 2000;
 
-    console.log(itens.length)
-
-    doc.style = " position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:"+(itens.length)+";width: calc(var(--total-items) * 100%);--selected-item: 2;left: calc(var(--selected-item)*-100%);transition: left 1s;"
-    var millisecondsToWait = 1000;
-
-    thread = setInterval(function () {
+    thread = setInterval(function() {
         ;
-        doc.style.setProperty('--selected-item', index);
+        slider.style.setProperty('--index', index);
         index++;
 
         if (index > max - 1) {
             index = 0;
         }
-    }, millisecondsToWait, 100);
+    }, millisecondsToWait);
 
 
 }
