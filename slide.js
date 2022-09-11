@@ -1,23 +1,21 @@
 var threads = [];
 var animationSpeed = 1000;
 var cooldown = 5000;
+window.onload = function () {
 
-export default function init() {
-    window.onload = function () {
-
-        const sliderList = document.querySelectorAll("slider")
-        if (sliderList.length > 0) {
-            for (var slider of sliderList) {
-                startSlider(slider)
-            }
+    const sliderList = document.querySelectorAll("slider")
+    if (sliderList.length > 0) {
+        for (var slider of sliderList) {
+            startSlider(slider)
         }
-
+    }
+    else
+    {
+        console.warn('[banana-slider] No sliders here!\nIf you need help try check banana.kruceo.com\nCase you don\'t like this message, add banana.mess = false');
     }
 }
 
-export async function startSlider(yourSlider) {
-
-
+async function startSlider(yourSlider) {
 
     let slider = yourSlider;
     if (slider.getAttribute('cooldown')) {
@@ -52,5 +50,8 @@ export async function startSlider(yourSlider) {
 }
 
 async function stopSlider() {
-    clearInterval(threads);
+    array.forEach(element => {
+        clearInterval(element);
+    });
+
 }
