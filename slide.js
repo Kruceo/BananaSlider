@@ -14,8 +14,16 @@ window.onload = function () {
 }
 
 async function startSlider(yourSlider) {
-    let slider = yourSlider;
 
+    
+
+    let slider = yourSlider;
+    if (slider.getAttribute('cooldown')) {
+        cooldown = slider.getAttribute('cooldown')
+    }
+    if (slider.getAttribute('speed')) {
+        animationSpeed = slider.getAttribute('speed')
+    }
     slider.innerHTML = '<slider-frame>' + slider.innerHTML + '</slider-frame>';
     //slider = slider.querySelector('slider');
     //document.querySelector('slider');
