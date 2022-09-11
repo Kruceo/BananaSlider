@@ -2,20 +2,22 @@ var threads = [];
 var animationSpeed = 1000;
 var cooldown = 5000;
 
-window.onload = function () {
+export default function init() {
+    window.onload = function () {
 
-    const sliderList = document.querySelectorAll("slider")
-    if (sliderList.length > 0) {
-        for (var slider of sliderList) {
-            startSlider(slider)
+        const sliderList = document.querySelectorAll("slider")
+        if (sliderList.length > 0) {
+            for (var slider of sliderList) {
+                startSlider(slider)
+            }
         }
-    }
 
+    }
 }
 
 export async function startSlider(yourSlider) {
 
-    
+
 
     let slider = yourSlider;
     if (slider.getAttribute('cooldown')) {
@@ -36,10 +38,8 @@ export async function startSlider(yourSlider) {
     console.log(slider);
 
     slider.style.setProperty("overflow", "hidden");
-    slider.style.setProperty("display","block");
+    slider.style.setProperty("display", "block");
     frame.style = "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:" + (itens.length) + ";width: calc(var(--total-items) * 100%);--index: 0;left: calc(var(--index)*-100%);transition: left " + animationSpeed + "ms;"
-
-
     threads[threads.length] = setInterval(function () {
         ;
         frame.style.setProperty('--index', index);
@@ -49,7 +49,6 @@ export async function startSlider(yourSlider) {
             index = 0;
         }
     }, cooldown);
-
 }
 
 async function stopSlider() {
