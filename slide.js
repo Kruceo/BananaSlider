@@ -13,7 +13,7 @@ window.onload = function () {
 
 }
 
-async function startSlider(yourSlider) {
+export async function startSlider(yourSlider) {
 
     
 
