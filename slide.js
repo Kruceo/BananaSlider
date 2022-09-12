@@ -21,11 +21,23 @@ async function startSlider(yourSlider) {
     if (slider.getAttribute('cooldown')) {
         cooldown = slider.getAttribute('cooldown')
     }
+    else
+    {
+        cooldown = 2000
+    }
     if (slider.getAttribute('speed')) {
         animationSpeed = slider.getAttribute('speed')
     }
+    else
+    {
+        animationSpeed = 500
+    }
     if (slider.getAttribute('hover')) {
         hover = slider.getAttribute('hover')
+    }
+    else
+    {
+        hover = 'stop'
     }
     slider.innerHTML = '<slider-frame>' + slider.innerHTML + '</slider-frame>';
     let frame = slider.querySelector('slider-frame');
