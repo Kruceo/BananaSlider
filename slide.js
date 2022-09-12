@@ -62,10 +62,13 @@ async function startSlider(yourSlider) {
     }
     switch (hover) {
         case 'stop':
+            var thisIndex = 0;
             slider.addEventListener('mouseover', function (event) {
+                thisIndex = frame.style.getPropertyValue('--index')
                 frame.style.setProperty('--speed', '100000s');
             }, false)
             slider.addEventListener('mouseout', function (event) {
+                index = thisIndex;
                 frame.style.setProperty('--speed', animationSpeed + 'ms');
             }, false)
             break;
