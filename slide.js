@@ -1,6 +1,6 @@
 var threads = [];
-var animationSpeed = 750;
-var cooldown = 1000;
+var animationSpeed = 250;
+var cooldown = 100;
 var hover = 'stop'
 var animation = 'left'
 window.onload = function () {
@@ -60,26 +60,29 @@ async function startSlider(yourSlider) {
             }
         }, cooldown);
     }
+    var atualIndex = 0;
     switch (hover) {
         case 'stop':
-            var thisIndex = 0;
+            
             slider.addEventListener('mouseover', function (event) {
-                thisIndex = frame.style.getPropertyValue('--index')
+                atualIndex = frame.style.getPropertyValue('--index')
+                console.log(atualIndex);
                 frame.style.setProperty('--speed', '100000s');
-            }, false)
-            slider.addEventListener('mouseout', function (event) {
-                index = thisIndex;
-                frame.style.setProperty('--speed', animationSpeed + 'ms');
-            }, false)
-            break;
-        case 'add':
-            const thisIndex = frame.style.getPropertyValue('--index')
-
-            slider.addEventListener('mouseover', function (event) {
-                frame.style.setProperty('--index', thisIndex + 1);
             }, true)
             slider.addEventListener('mouseout', function (event) {
-                frame.style.setProperty('--index', thisIndex);
+                index = Number.parseInt(atualIndex);
+                atualIndex = 0;
+                frame.style.setProperty('--speed', animationSpeed + 'ms');
+            }, true)
+            break;
+        case 'add':
+            atualIndex = frame.style.getPropertyValue('--index')
+
+            slider.addEventListener('mouseover', function (event) {
+                frame.style.setProperty('--index', atualIndex + 1);
+            }, true)
+            slider.addEventListener('mouseout', function (event) {
+                frame.style.setProperty('--index', atualIndex);
             }, true)
             break;
 
