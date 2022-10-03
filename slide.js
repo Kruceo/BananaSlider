@@ -4,15 +4,16 @@ var cooldown = 200;
 var hover = 'stop'
 var animation = 'left'
 window.onload = function () {
+   init();
+}
+function init() {
     const sliderList = document.querySelectorAll("slider")
     if (sliderList.length > 0) {
         for (var slider of sliderList) {
-
             let thread = startSlider(slider).then((id)=>
             {
                 console.log(id);
             })
-           
             registerSlider(slider)
         }
     }
