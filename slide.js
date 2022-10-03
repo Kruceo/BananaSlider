@@ -1,14 +1,19 @@
 var threads = [];
-var animationSpeed = 250;
-var cooldown = 100;
+var animationSpeed = 500;
+var cooldown = 200;
 var hover = 'stop'
 var animation = 'left'
-
-function init(){
+window.onload = function () {
     const sliderList = document.querySelectorAll("slider")
     if (sliderList.length > 0) {
         for (var slider of sliderList) {
-            startSlider(slider)
+
+            let thread = startSlider(slider).then((id)=>
+            {
+                console.log(id);
+            })
+           
+            registerSlider(slider)
         }
     }
     else {
@@ -16,9 +21,7 @@ function init(){
     }
 }
 
-window.onload = function () {
-   init();
-}
+var sliders = [];
 
 async function startSlider(yourSlider) {
 
@@ -26,23 +29,26 @@ async function startSlider(yourSlider) {
     if (slider.getAttribute('cooldown')) {
         cooldown = slider.getAttribute('cooldown')
     }
-    else
-    {
+    else {
         cooldown = 2000
     }
     if (slider.getAttribute('speed')) {
         animationSpeed = slider.getAttribute('speed')
     }
-    else
-    {
+    else {
         animationSpeed = 500
     }
     if (slider.getAttribute('hover')) {
         hover = slider.getAttribute('hover')
     }
-    else
-    {
+    else {
         hover = 'stop'
+    }
+    if (slider.getAttribute('animation')) {
+        animation = slider.getAttribute('animation')
+    }
+    else {
+        animation = 'left'
     }
     slider.innerHTML = '<slider-frame>' + slider.innerHTML + '</slider-frame>';
     let frame = slider.querySelector('slider-frame');
@@ -50,10 +56,11 @@ async function startSlider(yourSlider) {
     var index = 0;
     var max = itens.length //slider.style.getPropertyValue('--total-items');
 
-    console.log(slider);
+    
 
     slider.style.setProperty("overflow", "hidden");
     slider.style.setProperty("display", "block");
+    
     switch (animation) {
         case 'left':
             frame.style = "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:" + (itens.length) + ";width: calc(var(--total-items) * 100%);--index: 0;--speed: " + animationSpeed + "ms;left: calc(var(--index)*-100%);transition: left var(--speed)";
@@ -71,6 +78,7 @@ async function startSlider(yourSlider) {
     if (cooldown > 0) {
         threads[threads.length] = setInterval(function () {
             frame.style.setProperty('--index', index);
+           
             index++;
             if (index > max - 1) {
                 index = 0;
@@ -80,10 +88,9 @@ async function startSlider(yourSlider) {
     var atualIndex = 0;
     switch (hover) {
         case 'stop':
-            
+
             slider.addEventListener('mouseover', function (event) {
                 atualIndex = frame.style.getPropertyValue('--index')
-                console.log(atualIndex);
                 frame.style.setProperty('--speed', '100000s');
             }, true)
             slider.addEventListener('mouseout', function (event) {
@@ -106,11 +113,67 @@ async function startSlider(yourSlider) {
         default:
             break;
     }
+    
+    return threads[threads.length - 1]
+}
+
+
+function registerSlider(element) {
+    let name = element.getAttribute('id') || 'slider' + Object.keys(sliders).length
+    sliders[name] = {
+        el: element,
+        name: name,
+        tp: (newIndex) => { goToSlide(element, newIndex) },
+        move: (value) => { moveSlider(element, value) }
+    }
 }
 
 async function stopAllSlider() {
-    array.forEach(element => {
+    threads.forEach(element => {
         clearInterval(element);
     });
+
+}
+
+async function moveSlider(yourSliderId, value) {
+    const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
+    const max = Number.parseInt(slider.style.getPropertyValue('--total-items'))
+    const index = Number.parseInt(slider.style.getPropertyValue('--index'))
+    var addValue = value;
+    if (!value) {
+        addValue = 1;
+    }
+    if (index == 0 && value < 0) {
+        addValue = 0;
+    }
+    if (index >= max - 1 && value > 0) {
+        addValue = -(max - 1);
+    }
+
+    slider.style.setProperty('--index', index + addValue)
+}
+async function goToSlide(yourSliderId, value) {
+    const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
+    const max = Number.parseInt(slider.style.getPropertyValue('--total-items'))
+    //const index = Number.parseInt(slider.style.getPropertyValue('--index'))
+    var addValue = value;
+    if (!value) {
+        addValue = 0;
+    }
+    if (addValue < 0) {
+        addValue = 0;
+    }
+    if (addValue > max - 1) {
+        addValue = max - 1;
+    }
+
+    slider.style.setProperty('--index', addValue)
+
+}
+
+async function deleteSlider(yourSliderId) {
+    const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
+    //const index = Number.parseInt(slider.style.getPropertyValue('--index'))
+    slider.style.setProperty('--index', addValue)
 
 }
