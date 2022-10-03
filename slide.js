@@ -3,9 +3,7 @@ var animationSpeed = 500;
 var cooldown = 200;
 var hover = 'stop'
 var animation = 'left'
-window.onload = function () {
-   init();
-}
+
 function init() {
     const sliderList = document.querySelectorAll("slider")
     if (sliderList.length > 0) {
@@ -20,6 +18,10 @@ function init() {
     else {
         console.warn('[banana-slider] No sliders here!\nIf you need help try check banana.kruceo.com\nCase you don\'t like this message, add banana.mess = false');
     }
+}
+
+window.onload = function () {
+   init();
 }
 
 var sliders = [];
