@@ -36,7 +36,7 @@
     </slide>
 </slider>
 ```
-*** To stop slide: ***
+To stop slide:
 ```html
 <slider cooldown: 0>   <!-- this do not any move, else with attribute "hover:'add'" or js script commands -->
     <slide>           
