@@ -123,7 +123,7 @@ async function startSlider(yourSlider) {
 
 function registerSlider(element) {
     let name = element.getAttribute('id') || 'slider' + Object.keys(sliders).length
-    sliders[name] = {
+    banana[name] = {
         el: element,
         name: name,
         tp: (newIndex) => { goToSlide(element, newIndex) },
