@@ -38,7 +38,7 @@
 ```
 To stop slide:
 ```html
-<slider cooldown: 0>   <!-- this do not any move, else with attribute "hover:'add'" or js script commands -->
+<slider cooldown: 0>   <!-- it doesn't move, other than with "hover:'add'" attribute or js script commands -->
     <slide>           
         <h2>I don't move any muscles</h2>
     </slide>
