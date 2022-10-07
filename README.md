@@ -96,7 +96,8 @@ To stop slide:
 ## How to control this with JS?
 
 All sliders are initialized on window load and indexed on "banana" object with your id attribute name, and you can find your slider calling the object "banana"...
-PS:  If you don't give a id to your slide is set the default name and you can reach it like any other, the name is set like "slider01", "slider02".........
+<br/>
+###### PS:  If you don't give a id to your slide is set the default name and you can reach it like any other, the name is set like "slider01", "slider02"......... ######
 
 ##### Write your slider like you prefer and give a id attribute... #####
 ```html
