@@ -1,6 +1,27 @@
 {
-    "type": "module",
-    "name": "BananaSlider",
-    "version": "0.2.1",
-    "main": "slide.js"
+  "type": "module",
+  "name": "bananaslider",
+  "version": "0.2.1",
+  "main": "slide.js",
+  "description": "```html <head>   ...   <script src=\"https://banana.kruceo.com/slide.js\"></script> </head> ```",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kruceo/bananaslider.git"
+  },
+  "keywords": [
+    "slider",
+    "js",
+    "carrousel",
+    "slideshow",
+    "label"
+  ],
+  "author": "kruceo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kruceo/bananaslider/issues"
+  },
+  "homepage": "https://github.com/Kruceo/bananaslider#readme"
 }

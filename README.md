@@ -93,6 +93,21 @@ To a stopped slide:
 </slider>
 ```
 
+## Customize initial slide: ##
+```html
+<slider initial: "1">    <!-- Show 2023 first" -->  
+    <slide>                 
+        <h2> 2022</h2>
+    </slide>
+    <slide>
+        <h2>2023</h2>
+    </slide>
+    <slide>
+        <h2>2024</h2>
+    </slide>
+</slider>
+```
+
 ## How to control this with JS?
 
 All sliders are initialized on window load and indexed on "banana" object with your id attribute name, and you can find your slider calling the object "banana"...
@@ -119,7 +134,7 @@ All sliders are initialized on window load and indexed on "banana" object with y
 </button>
 ```
 ### What is move? ###
-move adds the parameter number to actual slider index, try this:
+move adds the parameter number to current slider index, try this:
 ```html
 <button onClick="banana['my-slider'].move(1)">
 +1
@@ -130,8 +145,8 @@ move adds the parameter number to actual slider index, try this:
 <button onClick="banana['my-slider'].move(2)">
 +2
 </button>
-<button onClick="banana['my-slider'].move(3)">
-+3
+<button onClick="banana['my-slider'].move(-2)">
+-2
 </button>
 ```
 ### What is tp? ###
@@ -143,3 +158,7 @@ tp is acronym to "teleport" and do exactly this, a example:
 <button onClick="banana['my-slider'].tp(2)">  3  </button>
 <button onClick="banana['my-slider'].tp(3)">  4  </button>
 ```
+
+## More ##
+
+You can see more and in real time working examples in <a href='https://banana.kruceo.com'>banana.kruceo.com
