@@ -122,7 +122,7 @@ async function startSlider(yourSlider) {
 
 
 function registerSlider(element) {
-    let name = element.getAttribute('id') || 'slider' + Object.keys(sliders).length
+    let name = element.getAttribute('id') || 'slider' + Object.keys(banana).length
     banana[name] = {
         el: element,
         name: name,
