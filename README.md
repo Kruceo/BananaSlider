@@ -1,10 +1,10 @@
-# BananaSliderslide
+# BananaSlider 
 ## To init: ##
 ```html
 <body>
-  ...
+  <!-- If you just want a simple init, put this on the bottom of your "body" tag  -->
   <script src="https://banana.kruceo.com/dist/bundle.cjs"></script>
-  <script>initAllSliders()</script>
+  <script>initAllSliders();</script>
 </body>
 ```
 
@@ -113,7 +113,7 @@ To a stopped slide:
 
 All sliders are initialized on window load and indexed on "banana" object with your id attribute name, and you can find your slider calling the object "banana"...
 <br/>
-###### PS:  If you don't give a id to your slide is set the default name and you can reach it like any other, the name is set like "slider01", "slider02"......... ######
+###### PS:  If you don't give a id to your slide is set the default name and you can reach it like any other, the name is set like "slider1", "slider2"... ######
 
 ##### Write your slider like you prefer and give a id attribute... #####
 ```html
