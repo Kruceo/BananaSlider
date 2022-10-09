@@ -175,8 +175,7 @@ async function goToSlide(yourSliderId, value) {
 
 async function deleteSlider(yourSliderId) {
     const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
-    //const index = Number.parseInt(slider.style.getPropertyValue('--index'))
-    slider.style.setProperty('--index', addValue)
+    slider.style.setProperty('--index', addValue);
 
 }
 
