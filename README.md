@@ -1,11 +1,11 @@
 # BananaSliderslide
 ## To init: ##
 ```html
-<head>
+<body>
   ...
   <script src="https://banana.kruceo.com/dist/bundle.cjs.js"></script>
   <script>initAllSliders()</script>
-</head>
+</body>
 ```
 
 ## Your first step: ##
