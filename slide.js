@@ -1,10 +1,10 @@
-var threads = [];
+let threads = [];
 let animationSpeed = 500;
 let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-var banana = [];
+export let banana = [];
 function init() {
     banana = [];
     const sliderList = document.querySelectorAll("slider")
@@ -25,8 +25,6 @@ function init() {
 window.onload = function () {
    init();
 }
-
-
 
 async function startSlider(yourSlider) {
 
