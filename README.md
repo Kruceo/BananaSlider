@@ -3,7 +3,7 @@
 ```html
 <body>
   ...
-  <script src="https://banana.kruceo.com/dist/bundle.cjs.js"></script>
+  <script src="https://banana.kruceo.com/dist/bundle.cjs"></script>
   <script>initAllSliders()</script>
 </body>
 ```
