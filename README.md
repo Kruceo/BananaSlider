@@ -1,9 +1,10 @@
-# BananaSlider
+# BananaSliderslide
 ## To init: ##
 ```html
 <head>
   ...
-  <script src="https://banana.kruceo.com/slide.js"></script>
+  <script src="https://banana.kruceo.com/dist/bundle.cjs.js"></script>
+  <script>initAllSliders()</script>
 </head>
 ```
 
@@ -80,7 +81,7 @@ To a stopped slide:
 
 ## Customize animation: ##
 ```html
-<slider animation: "right">    <!-- "right", "left" or "up"... "left" is default -->  
+<slider animation = "right">    <!-- "right", "left" or "up"... "left" is default -->  
     <slide>                 
         <h2>I'll move to the right!</h2>
     </slide>
@@ -95,9 +96,9 @@ To a stopped slide:
 
 ## Customize initial slide: ##
 ```html
-<slider initial: "1">    <!-- Show 2023 first" -->  
+<slider initial = "1">    <!-- Show 2023 first" -->  
     <slide>                 
-        <h2> 2022</h2>
+        <h2>2022</h2>
     </slide>
     <slide>
         <h2>2023</h2>
