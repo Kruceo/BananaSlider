@@ -2,7 +2,7 @@
 ## To init: ##
 ```html
 <body>
-  <!-- If you just want a simple init, put this on the bottom of your "body" tag  -->
+  <!-- If you just want a simple init, put this at the bottom of your "body" tag  -->
   <script src="https://banana.kruceo.com/dist/bundle.cjs"></script>
   <script>initAllSliders();</script>
 </body>
