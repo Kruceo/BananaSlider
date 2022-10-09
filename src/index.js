@@ -4,8 +4,8 @@ let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-export let banana = [];
-function init() {
+let banana = [];
+function initAllSliders() {
     banana = [];
     const sliderList = document.querySelectorAll("slider")
     if (sliderList.length > 0) {
@@ -20,10 +20,6 @@ function init() {
     else {
         console.warn('[banana-slider] No sliders here!\nIf you need help try check banana.kruceo.com\nCase you don\'t like this message, add banana.mess = false');
     }
-}
-
-window.onload = function () {
-   init();
 }
 
 async function startSlider(yourSlider) {
@@ -183,3 +179,5 @@ async function deleteSlider(yourSliderId) {
     slider.style.setProperty('--index', addValue)
 
 }
+
+export { initAllSliders, banana }

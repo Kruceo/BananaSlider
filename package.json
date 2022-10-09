@@ -1,9 +1,9 @@
 {
   "type": "module",
   "name": "bananaslider",
-  "version": "0.2.3",
-  "main": "slide.js",
-  "description": "```html <head>   ...   <script src=\"https://banana.kruceo.com/slide.js\"></script> </head> ```",
+  "version": "0.2.4",
+  "main": "src/index.js",
+  "description": "Simple JS slider",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
