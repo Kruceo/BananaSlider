@@ -7,7 +7,7 @@
 </head>
 ```
 
-## To use: ##
+## Your first step: ##
 ```html
 <slider>
     <slide>
@@ -24,7 +24,7 @@
 
 ## Customize showtime: ##
 ```html
-<slider cooldown: 5000>   <!-- 5 seconds -->
+<slider cooldown = 5000>   <!-- 5 seconds -->
     <slide>           
         <h2>5 seconds to change bro!</h2>
     </slide>
@@ -38,7 +38,7 @@
 ```
 To a stopped slide:
 ```html
-<slider cooldown: 0>   <!-- it doesn't move, other than with "hover:'add'" attribute or js script commands -->
+<slider cooldown = 0>   <!-- it doesn't move, other than with "hover:'add'" attribute or js script commands -->
     <slide>           
         <h2>I don't move any muscles</h2>
     </slide>
@@ -53,7 +53,7 @@ To a stopped slide:
 
 ## Customize animation speed: ##
 ```html
-<slider speed: 250>    <!-- 0.25 seconds --> 
+<slider speed = 250>    <!-- 0.25 seconds --> 
     <slide>
         <h2>I'll complete this transition in 250 millis</h2>
     </slide>
@@ -68,7 +68,7 @@ To a stopped slide:
 
 ## Customize hover action: ##
 ```html
-<slider hover: "add">    <!-- "add", "stop" or "none"... "stop" is default -->  
+<slider hover = "add">    <!-- "add", "stop" or "none"... "stop" is default -->  
     <slide>                 
         <h2>Put your mouse over me!</h2>
     </slide>

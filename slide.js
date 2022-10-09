@@ -4,8 +4,9 @@ let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-
+var banana = [];
 function init() {
+    banana = [];
     const sliderList = document.querySelectorAll("slider")
     if (sliderList.length > 0) {
         for (var slider of sliderList) {
@@ -13,7 +14,7 @@ function init() {
             {
                 console.log(id);
             })
-            registerSlider(slider)
+            registerSlider(slider,thread)
         }
     }
     else {
@@ -25,37 +26,37 @@ window.onload = function () {
    init();
 }
 
-var banana = [];
+
 
 async function startSlider(yourSlider) {
 
     let slider = yourSlider;
     if (slider.getAttribute('cooldown')) {
-        cooldown = slider.getAttribute('cooldown')
+        cooldown = slider.getAttribute('cooldown');
     }
     else {
-        cooldown = 2000
+        cooldown = 2000;
     }
     if (slider.getAttribute('speed')) {
-        animationSpeed = slider.getAttribute('speed')
+        animationSpeed = slider.getAttribute('speed');
     }
     else {
-        animationSpeed = 500
+        animationSpeed = 500;
     }
     if (slider.getAttribute('hover')) {
-        hover = slider.getAttribute('hover')
+        hover = slider.getAttribute('hover');
     }
     else {
-        hover = 'stop'
+        hover = 'stop';
     }
     if (slider.getAttribute('animation')) {
-        animation = slider.getAttribute('animation')
+        animation = slider.getAttribute('animation');
     }
     else {
-        animation = 'left'
+        animation = 'left';
     }
     if (slider.getAttribute('initial')) {
-        initial = slider.getAttribute('initial')
+        initial = slider.getAttribute('initial');
     }
     else {
         initial = 0;
@@ -64,9 +65,7 @@ async function startSlider(yourSlider) {
     let frame = slider.querySelector('slider-frame');
     let itens = frame.querySelectorAll('slide');
     let index = initial;
-    let max = itens.length
-
-    
+    let max = itens.length;
 
     slider.style.setProperty("overflow", "hidden");
     slider.style.setProperty("display", "block");
@@ -127,10 +126,11 @@ async function startSlider(yourSlider) {
 }
 
 
-function registerSlider(element) {
+function registerSlider(element,thread) {
     let name = element.getAttribute('id') || 'slider' + Object.keys(banana).length
     banana[name] = {
         el: element,
+        thread: thread,
         name: name,
         tp: (newIndex) => { goToSlide(element, newIndex) },
         move: (value) => { moveSlider(element, value) }
