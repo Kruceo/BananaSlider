@@ -5,7 +5,7 @@ let hover = "stop";
 let animation = "left";
 let initial = 0;
 let banana = [];
-function initAllbanana() {
+function initAllSliders() {
   banana = [];
   const sliderList = document.querySelectorAll("slider");
   if (sliderList.length > 0) {
@@ -49,13 +49,13 @@ async function startSlider(yourSlider) {
   }
   slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
   let frame = slider.querySelector("slider-frame");
-  let itens = frame.querySelectorAll("slide");
+  let itens = [...frame.querySelectorAll("slide")];
   let index = initial;
   let max = itens.length;
 
   slider.style.setProperty("overflow", "hidden");
   slider.style.setProperty("display", "block");
-
+  
   switch (animation) {
     case "horizontal":
       frame.style =
@@ -66,18 +66,17 @@ async function startSlider(yourSlider) {
         "ms;left: calc(var(--index)*-100%);transition: left var(--speed)";
       break;
     case "vertical":
-      frame.style =
-        "position: relative;top: 0%;--total-items:" +
-        itens.length +
-        ";height: calc(var(--total-items) * 100%);--index: "+initial+";--speed: " +
-        animationSpeed +
-        "ms;top: calc(var(--index)*-100%);transition: top var(--speed)";
+        slider.style.setProperty('height','20px');
+        frame.style = "position: relative;top: 0%;display: flex;flex-direction: column;grid-auto-row: 1fr;--total-items:" +
+      itens.length +
+      ";height: calc(var(--total-items) * 100%);--index: "+initial+";--speed: " +
+      animationSpeed +
+      "ms;top: calc(var(--index) * -100%);transition: top var(--speed)";
       break;
   }
   if (cooldown > 0) {
     threads[threads.length] = setInterval(function () {
       frame.style.setProperty("--index", index);
-
       index++;
       if (index > max - 1) {
         index = 0;
