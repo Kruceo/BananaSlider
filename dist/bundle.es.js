@@ -4,10 +4,10 @@ let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-export let banana = [];
-export function initAllSliders() {
+let banana = [];
+function initAllSliders() {
     banana = [];
-    const sliderList = document.querySelectorAll("slider")
+    const sliderList = document.querySelectorAll("slider");
     if (sliderList.length > 0) {
         for (var slider of sliderList) {
             let thread = startSlider(slider);
@@ -71,9 +71,6 @@ async function startSlider(yourSlider) {
         case 'up':
             frame.style = "position: relative;top: 0%;--total-items:" + (itens.length) + ";height: calc(var(--total-items) * 100%);--index: 0;--speed: " + animationSpeed + "ms;top: calc(var(--index)*-100%);transition: top var(--speed)";
             break;
-
-        default:
-            break;
     }
     if (cooldown > 0) {
         threads[threads.length] = setInterval(function () {
@@ -90,27 +87,24 @@ async function startSlider(yourSlider) {
         case 'stop':
 
             slider.addEventListener('mouseover', function (event) {
-                currentIndex = frame.style.getPropertyValue('--index')
+                currentIndex = frame.style.getPropertyValue('--index');
                 frame.style.setProperty('--speed', '100000s');
-            }, true)
+            }, true);
             slider.addEventListener('mouseout', function (event) {
                 index = Number.parseInt(currentIndex);
                 currentIndex = 0;
                 frame.style.setProperty('--speed', animationSpeed + 'ms');
-            }, true)
+            }, true);
             break;
         case 'add':
-            currentIndex = frame.style.getPropertyValue('--index')
+            currentIndex = frame.style.getPropertyValue('--index');
 
             slider.addEventListener('mouseover', function (event) {
                 frame.style.setProperty('--index', currentIndex + 1);
-            }, true)
+            }, true);
             slider.addEventListener('mouseout', function (event) {
                 frame.style.setProperty('--index', currentIndex);
-            }, true)
-            break;
-
-        default:
+            }, true);
             break;
     }
     return threads[threads.length - 1]
@@ -118,26 +112,20 @@ async function startSlider(yourSlider) {
 
 
 function registerSlider(element,thread) {
-    let name = element.getAttribute('id') || 'slider' + Object.keys(banana).length
+    let name = element.getAttribute('id') || 'slider' + Object.keys(banana).length;
     banana[name] = {
         el: element,
         thread: thread,
         name: name,
-        tp: (newIndex) => { goToSlide(element, newIndex) },
-        move: (value) => { moveSlider(element, value) }
-    }
-}
-
-async function stopAllSlider() {
-    threads.forEach(element => {
-        clearInterval(element);
-    });
+        tp: (newIndex) => { goToSlide(element, newIndex); },
+        move: (value) => { moveSlider(element, value); }
+    };
 }
 
 async function moveSlider(yourSliderId, value) {
     const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
-    const max = Number.parseInt(slider.style.getPropertyValue('--total-items'))
-    const index = Number.parseInt(slider.style.getPropertyValue('--index'))
+    const max = Number.parseInt(slider.style.getPropertyValue('--total-items'));
+    const index = Number.parseInt(slider.style.getPropertyValue('--index'));
     var addValue = value;
     if (!value) {
         addValue = 1;
@@ -149,11 +137,11 @@ async function moveSlider(yourSliderId, value) {
         addValue = -(max - 1);
     }
 
-    slider.style.setProperty('--index', index + addValue)
+    slider.style.setProperty('--index', index + addValue);
 }
 async function goToSlide(yourSliderId, value) {
     const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
-    const max = Number.parseInt(slider.style.getPropertyValue('--total-items'))
+    const max = Number.parseInt(slider.style.getPropertyValue('--total-items'));
     //const index = Number.parseInt(slider.style.getPropertyValue('--index'))
     var addValue = value;
     if (!value) {
@@ -166,12 +154,8 @@ async function goToSlide(yourSliderId, value) {
         addValue = max - 1;
     }
 
-    slider.style.setProperty('--index', addValue)
-
-}
-
-async function deleteSlider(yourSliderId) {
-    const slider = yourSliderId.getElementsByTagName('slider-frame')[0];
     slider.style.setProperty('--index', addValue);
 
 }
+
+export { banana, initAllSliders };

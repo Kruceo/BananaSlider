@@ -4,8 +4,8 @@ let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-export let banana = [];
-export function initAllSliders() {
+let banana = [];
+function initAllSliders() {
     banana = [];
     const sliderList = document.querySelectorAll("slider")
     if (sliderList.length > 0) {

@@ -1,6 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
 
 let threads = [];
 let animationSpeed = 500;
@@ -8,16 +5,13 @@ let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-exports.banana = [];
+let banana = [];
 function initAllSliders() {
-    exports.banana = [];
+    banana = [];
     const sliderList = document.querySelectorAll("slider");
     if (sliderList.length > 0) {
         for (var slider of sliderList) {
-            let thread = startSlider(slider).then((id)=>
-            {
-                console.log(id);
-            });
+            let thread = startSlider(slider);
             registerSlider(slider,thread);
         }
     }
@@ -119,8 +113,8 @@ async function startSlider(yourSlider) {
 
 
 function registerSlider(element,thread) {
-    let name = element.getAttribute('id') || 'slider' + Object.keys(exports.banana).length;
-    exports.banana[name] = {
+    let name = element.getAttribute('id') || 'slider' + Object.keys(banana).length;
+    banana[name] = {
         el: element,
         thread: thread,
         name: name,
@@ -164,5 +158,3 @@ async function goToSlide(yourSliderId, value) {
     slider.style.setProperty('--index', addValue);
 
 }
-
-exports.initAllSliders = initAllSliders;
