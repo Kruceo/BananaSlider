@@ -5,6 +5,7 @@ let hover = "stop";
 let animation = "left";
 let initial = 0;
 let banana = [];
+const evt = new Event('show');
 function initAllSliders() {
   banana = [];
   const sliderList = document.querySelectorAll("slider");
@@ -34,6 +35,24 @@ async function startSlider(yourSlider) {
   }
   let frame = slider.querySelector("slider-frame");
   let itens = [...frame.querySelectorAll("slide")];
+  itens.forEach((item)=>
+  {
+    if(item.getAttribute('onShow')!= null)
+    {
+      item.addEventListener('show',(e)=>
+      {
+        try
+        {
+        let t = new Function(item.getAttribute('onShow'));
+        t()
+        }
+        catch(error)
+        {
+          console.error('[banana-slider] '+e.target.localName + ' - '+ e.target.id+ ' Slider onShow attribute error \n'+error);
+        }
+      })
+    }
+  })
   let index = initial;
   let max = itens.length;
 
@@ -70,6 +89,8 @@ async function startSlider(yourSlider) {
     threads[threads.length] = setLoop(() => {
       threads[threads.length - 1].delay =
         itens[index].getAttribute("cooldown") ?? cooldown;
+        itens[index].dispatchEvent(evt);
+        
       frame.style.setProperty("--index", index);
       index++;
       if (index > max - 1) {
