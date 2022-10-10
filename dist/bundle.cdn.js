@@ -22,33 +22,14 @@ function initAllSliders() {
 
 async function startSlider(yourSlider) {
   let slider = yourSlider;
-  if (slider.getAttribute("cooldown")) {
-    cooldown = slider.getAttribute("cooldown");
-  } else {
-    cooldown = 2000;
-  }
-  if (slider.getAttribute("speed")) {
-    animationSpeed = slider.getAttribute("speed");
-  } else {
-    animationSpeed = 500;
-  }
-  if (slider.getAttribute("hover")) {
-    hover = slider.getAttribute("hover");
-  } else {
-    hover = "stop";
-  }
-  if (slider.getAttribute("animation")) {
-    animation = slider.getAttribute("animation");
-  } else {
-    animation = "horizontal";
-  }
-  if (slider.getAttribute("initial")) {
-    initial = slider.getAttribute("initial");
-  } else {
-    initial = 0;
-  }
-  if(!slider.querySelector('slider-frame')){
-  slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
+  cooldown = slider.getAttribute("cooldown") ?? 2000;
+  animationSpeed = slider.getAttribute("speed") ?? 500;
+  hover = slider.getAttribute("hover") ?? "stop";
+  animation = slider.getAttribute("animation") ?? "horizontal";
+  initial = slider.getAttribute("initial") ?? 0;
+
+  if (!slider.querySelector("slider-frame")) {
+    slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
   }
   let frame = slider.querySelector("slider-frame");
   let itens = [...frame.querySelectorAll("slide")];
@@ -57,23 +38,28 @@ async function startSlider(yourSlider) {
 
   slider.style.setProperty("overflow", "hidden");
   slider.style.setProperty("display", "block");
-  
+
   switch (animation) {
     case "horizontal":
       frame.style =
         "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:" +
         itens.length +
-        ";width: calc(var(--total-items) * 100%);--index: "+initial+";--speed: " +
+        ";width: calc(var(--total-items) * 100%);--index: " +
+        initial +
+        ";--speed: " +
         animationSpeed +
         "ms;left: calc(var(--index)*-100%);transition: left var(--speed)";
       break;
     case "vertical":
-        slider.style.setProperty('height','20px');
-        frame.style = "position: relative;top: 0%;display: flex;flex-direction: column;grid-auto-row: 1fr;--total-items:" +
-      itens.length +
-      ";height: calc(var(--total-items) * 100%);--index: "+initial+";--speed: " +
-      animationSpeed +
-      "ms;top: calc(var(--index) * -100%);transition: top var(--speed)";
+      slider.style.setProperty("height", "20px");
+      frame.style =
+        "position: relative;top: 0%;display: flex;flex-direction: column;grid-auto-row: 1fr;--total-items:" +
+        itens.length +
+        ";height: calc(var(--total-items) * 100%);--index: " +
+        initial +
+        ";--speed: " +
+        animationSpeed +
+        "ms;top: calc(var(--index) * -100%);transition: top var(--speed)";
       break;
   }
   if (cooldown > 0) {
