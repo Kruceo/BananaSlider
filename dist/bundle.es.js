@@ -47,7 +47,9 @@ async function startSlider(yourSlider) {
   } else {
     initial = 0;
   }
+  if(!slider.querySelector('slider-frame')){
   slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
+  }
   let frame = slider.querySelector("slider-frame");
   let itens = [...frame.querySelectorAll("slide")];
   let index = initial;

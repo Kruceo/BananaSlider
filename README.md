@@ -81,7 +81,7 @@ To a stopped slide:
 
 ## Customize animation: ##
 ```html
-<slider animation = "right">    <!-- "right", "left" or "up"... "left" is default -->  
+<slider animation = "vertical">    <!-- "vertical" and "horizontal"... "horizontal" is default -->  
     <slide>                 
         <h2>I'll move to the right!</h2>
     </slide>
