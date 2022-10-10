@@ -25,6 +25,7 @@ async function startSlider(yourSlider) {
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
   hover = slider.getAttribute("hover") ?? "stop";
+  console.log(slider.getAttribute("animation"));
   animation = slider.getAttribute("animation") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
 
@@ -66,13 +67,15 @@ async function startSlider(yourSlider) {
       break;
   }
   if (cooldown > 0) {
-    threads[threads.length] = setInterval(function () {
+    threads[threads.length] = setLoop(() => {
+      threads[threads.length - 1].delay =
+        itens[index].getAttribute("cooldown") ?? cooldown;
       frame.style.setProperty("--index", index);
       index++;
       if (index > max - 1) {
         index = 0;
       }
-    }, cooldown);
+    }, itens[index].getAttribute("cooldown") ?? cooldown);
   }
   let currentIndex = 0;
   switch (hover) {
@@ -180,5 +183,24 @@ async function deleteSlider(yourSliderId) {
   const slider = yourSliderId.getElementsByTagName("slider-frame")[0];
   slider.style.setProperty("--index", addValue);
 }
-
+export function setLoop(func, initialDelay) {
+  let thisLoop = {
+    delay: initialDelay,
+    start: () => {
+      setTimeout(() => {
+        if (!thisLoop.stopped) {
+          func();
+          thisLoop.start(thisLoop.delay);
+          return;
+        }
+      }, thisLoop.delay);
+    },
+    stopped: false,
+    stop: () => {
+      thisLoop.stopped = true;
+    },
+  };
+  thisLoop.start();
+  return thisLoop;
+}
 export { banana, initAllSliders };
