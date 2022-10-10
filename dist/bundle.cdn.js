@@ -1,13 +1,12 @@
-
 let threads = [];
 let animationSpeed = 500;
 let cooldown = 200;
 let hover = 'stop';
 let animation = 'left';
 let initial = 0;
-let banana = [];
+let sliders = [];
 function initAllSliders() {
-    banana = [];
+    sliders = [];
     const sliderList = document.querySelectorAll("slider");
     if (sliderList.length > 0) {
         for (var slider of sliderList) {
@@ -16,7 +15,7 @@ function initAllSliders() {
         }
     }
     else {
-        console.warn('[banana-slider] No sliders here!\nIf you need help try check banana.kruceo.com\nCase you don\'t like this message, add banana.mess = false');
+        console.warn('[banana-slider] No sliders here!\nIf you need help try check sliders.kruceo.com\nCase you don\'t like this message, add sliders.mess = false');
     }
 }
 
@@ -113,8 +112,8 @@ async function startSlider(yourSlider) {
 
 
 function registerSlider(element,thread) {
-    let name = element.getAttribute('id') || 'slider' + Object.keys(banana).length;
-    banana[name] = {
+    let name = element.getAttribute('id') || 'slider' + Object.keys(sliders).length;
+    sliders[name] = {
         el: element,
         thread: thread,
         name: name,
@@ -158,3 +157,4 @@ async function goToSlide(yourSliderId, value) {
     slider.style.setProperty('--index', addValue);
 
 }
+
