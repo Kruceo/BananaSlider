@@ -1,6 +1,6 @@
 {
   "name": "bananaslider",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "main": "src/index.js",
   "description": "Simple JS slider",
   "scripts": {
@@ -19,8 +19,8 @@
   ],
   "exports": {
     ".": {
-      "require": "./dist/bundle.cjs",
-      "import": "./dist/bundle.js"
+      "require": "./dist/bundle.es.js",
+      "import": "./dist/bundle.cjs.js"
     }
   },
   "author": "kruceo",
