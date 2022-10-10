@@ -8,9 +8,9 @@ let cooldown = 200;
 let hover = "stop";
 let animation = "left";
 let initial = 0;
-exports.sliders = [];
-function initAllSliders() {
-  exports.sliders = [];
+exports.banana = [];
+function initAllbanana() {
+  exports.banana = [];
   const sliderList = document.querySelectorAll("slider");
   if (sliderList.length > 0) {
     for (var slider of sliderList) {
@@ -19,7 +19,7 @@ function initAllSliders() {
     }
   } else {
     console.warn(
-      "[banana-slider] No sliders here!\nIf you need help try check sliders.kruceo.com\nCase you don't like this message, add sliders.mess = false"
+      "[banana-slider] No sliders here!\nIf you need help try check banana.kruceo.com\nCase you don't like this message, add banana.mess = false"
     );
   }
 }
@@ -56,7 +56,6 @@ async function startSlider(yourSlider) {
   let itens = frame.querySelectorAll("slide");
   let index = initial;
   let max = itens.length;
-  ///console.log(initial);
 
   slider.style.setProperty("overflow", "hidden");
   slider.style.setProperty("display", "block");
@@ -134,8 +133,8 @@ async function startSlider(yourSlider) {
 
 function registerSlider(element, thread) {
   let name =
-    element.getAttribute("id") || "slider" + Object.keys(exports.sliders).length;
-  exports.sliders[name] = {
+    element.getAttribute("id") || "slider" + Object.keys(exports.banana).length;
+  exports.banana[name] = {
     el: element,
     thread: thread,
     name: name,
@@ -182,4 +181,4 @@ async function goToSlide(yourSliderId, value) {
   slider.style.setProperty("--index", addValue);
 }
 
-exports.initAllSliders = initAllSliders;
+exports.initAllbanana = initAllbanana;
