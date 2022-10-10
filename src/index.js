@@ -40,7 +40,7 @@ async function startSlider(yourSlider) {
   if (slider.getAttribute("animation")) {
     animation = slider.getAttribute("animation");
   } else {
-    animation = "left";
+    animation = "horizontal";
   }
   if (slider.getAttribute("initial")) {
     initial = slider.getAttribute("initial");
@@ -52,32 +52,25 @@ async function startSlider(yourSlider) {
   let itens = frame.querySelectorAll("slide");
   let index = initial;
   let max = itens.length;
+  ///console.log(initial);
 
   slider.style.setProperty("overflow", "hidden");
   slider.style.setProperty("display", "block");
 
   switch (animation) {
-    case "left":
+    case "horizontal":
       frame.style =
         "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:" +
         itens.length +
-        ";width: calc(var(--total-items) * 100%);--index: 0;--speed: " +
+        ";width: calc(var(--total-items) * 100%);--index: "+initial+";--speed: " +
         animationSpeed +
         "ms;left: calc(var(--index)*-100%);transition: left var(--speed)";
       break;
-    case "right":
-      frame.style =
-        "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:" +
-        itens.length +
-        ";width: calc(var(--total-items) * 100%);--index: 0;--speed: " +
-        animationSpeed +
-        "ms;left: calc(var(--index)*100%);transition: left var(--speed)";
-      break;
-    case "up":
+    case "vertical":
       frame.style =
         "position: relative;top: 0%;--total-items:" +
         itens.length +
-        ";height: calc(var(--total-items) * 100%);--index: 0;--speed: " +
+        ";height: calc(var(--total-items) * 100%);--index: "+initial+";--speed: " +
         animationSpeed +
         "ms;top: calc(var(--index)*-100%);transition: top var(--speed)";
       break;
