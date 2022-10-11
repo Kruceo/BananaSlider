@@ -1,35 +1,33 @@
 {
-  "name": "bananaslider",
-  "version": "0.5.0",
-  "main": "src/index.js",
-  "description": "Simple JS slider",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name":"bananaslider",
+  "version":"0.3.0",
+  "main":"src/index.js",
+  "description":"Simple JS slider",
+  "scripts":{
+    "test":"echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kruceo/bananaslider.git"
+  "repository":{
+    "type":"git",
+    "url":"git+https://github.com/Kruceo/bananaslider.git"
   },
-  "keywords": [
-    "slider",
-    "js",
-    "carrousel",
-    "slideshow",
-    "label"
-  ],
-  "exports": {
-    ".": {
-      "require": "./dist/bundle.es.js",
-      "import": "./dist/bundle.cjs.js"
+  "keywords":["slider",
+  "js",
+  "carrousel",
+  "slideshow",
+  "label"],
+  "exports":{
+    ".":{
+      "require":"./dist/bundle.es.js",
+      "import":"./dist/bundle.cjs.js"
     }
   },
-  "author": "kruceo",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Kruceo/bananaslider/issues"
+  "author":"kruceo",
+  "license":"ISC",
+  "bugs":{
+    "url":"https://github.com/Kruceo/bananaslider/issues"
   },
-  "homepage": "https://github.com/Kruceo/bananaslider#readme",
-  "dependencies": {
-    "typescript": "^4.8.4"
+  "homepage":"https://github.com/Kruceo/bananaslider#readme",
+  "dependencies":{
+    "typescript":"^4.8.4"
   }
 }

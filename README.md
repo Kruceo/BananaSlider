@@ -191,7 +191,17 @@ tp is acronym to "teleport" and do exactly this, a example:
 <button onClick="banana['my-slider'].tp(2)">3</button>
 <button onClick="banana['my-slider'].tp(3)">4</button>
 ```
+### What is getIndex?
 
+the getIndex function return the current slide that's showing:
+
+```js
+setInterval(()=>
+{
+  let i = banana['my-slider'].getIndex();
+  console.log(i)
+},1000)
+```
 ## Using the show event:
 
 The most basic use of the event is with the attribute "onShow":
