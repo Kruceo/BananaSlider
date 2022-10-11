@@ -1,4 +1,5 @@
 # News
 
-* added getIndex() 
+* added getIndex() => documented 
 * dded onShow event  => documented
+* curveAttr => not documented

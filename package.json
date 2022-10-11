@@ -1,6 +1,6 @@
 {
   "name":"bananaslider",
-  "version":"0.6.1",
+  "version":"0.7.0",
   "main":"src/index.js",
   "description":"Simple JS slider",
   "scripts":{
@@ -26,8 +26,5 @@
   "bugs":{
     "url":"https://github.com/Kruceo/bananaslider/issues"
   },
-  "homepage":"https://github.com/Kruceo/bananaslider#readme",
-  "dependencies":{
-    "typescript":"^4.8.4"
-  }
+  "homepage":"https://github.com/Kruceo/bananaslider#readme"
 }

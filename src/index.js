@@ -5,6 +5,7 @@ let hover = "stop";
 let animation = "left";
 let initial = 0;
 let banana = [];
+let animationCurve = "";
 const evt = new Event("show");
 function initAllSliders() {
   banana = [];
@@ -28,7 +29,7 @@ async function startSlider(yourSlider) {
   hover = slider.getAttribute("hover") ?? "stop";
   animation = slider.getAttribute("animation") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
-
+  animationCurve = slider.getAttribute("curve")??""
   if (!slider.querySelector("slider-frame")) {
     slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
   }
@@ -68,7 +69,7 @@ async function startSlider(yourSlider) {
         initial +
         ";--speed: " +
         animationSpeed +
-        "ms;left: calc(var(--index)*-100%);transition: left var(--speed)";
+        "ms;left: calc(var(--index)*-100%);transition: left var(--speed) "+animationCurve;
       break;
     case "vertical":
       slider.style.setProperty("height", "20px");
@@ -79,7 +80,7 @@ async function startSlider(yourSlider) {
         initial +
         ";--speed: " +
         animationSpeed +
-        "ms;top: calc(var(--index) * -100%);transition: top var(--speed)";
+        "ms;top: calc(var(--index) * -100%);transition: top var(--speed) "+animationCurve;
       break;
 
     default:

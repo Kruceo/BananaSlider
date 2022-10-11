@@ -192,7 +192,6 @@ tp is acronym to "teleport" and do exactly this, a example:
 <button onClick="banana['my-slider'].tp(3)">4</button>
 ```
 ### What is getIndex?
-
 the getIndex function return the current slide that's showing:
 
 ```js
