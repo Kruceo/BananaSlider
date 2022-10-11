@@ -9,6 +9,7 @@ let hover = "stop";
 let animation = "left";
 let initial = 0;
 exports.banana = [];
+const evt = new Event("show");
 function initAllSliders() {
   exports.banana = [];
   const sliderList = document.querySelectorAll("slider");
@@ -29,7 +30,6 @@ async function startSlider(yourSlider) {
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
   hover = slider.getAttribute("hover") ?? "stop";
-  console.log(slider.getAttribute("animation"));
   animation = slider.getAttribute("animation") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
 
@@ -38,6 +38,25 @@ async function startSlider(yourSlider) {
   }
   let frame = slider.querySelector("slider-frame");
   let itens = [...frame.querySelectorAll("slide")];
+  itens.forEach((item) => {
+    if (item.getAttribute("onShow") != null) {
+      item.addEventListener("show", (e) => {
+        try {
+          let onSHowFunction = new Function(item.getAttribute("onShow"));
+          onSHowFunction();
+        } catch (error) {
+          console.error(
+            "[banana-slider] " +
+              e.target.localName +
+              " - " +
+              e.target.id +
+              " Slider onShow attribute error \n" +
+              error
+          );
+        }
+      });
+    }
+  });
   let index = initial;
   let max = itens.length;
 
@@ -71,6 +90,8 @@ async function startSlider(yourSlider) {
     threads[threads.length] = setLoop(() => {
       threads[threads.length - 1].delay =
         itens[index].getAttribute("cooldown") ?? cooldown;
+      itens[index].dispatchEvent(evt);
+
       frame.style.setProperty("--index", index);
       index++;
       if (index > max - 1) {
@@ -133,6 +154,11 @@ function registerSlider(element, thread) {
     },
     move: (value) => {
       moveSlider(element, value);
+    },
+    getIndex: () => {
+      return parseInt(
+        element.querySelector("slider-frame").style.getPropertyValue("--index")
+      );
     },
   };
 }
