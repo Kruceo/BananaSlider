@@ -110,11 +110,28 @@ To individual slide showtime set:
 </slider>
 ```
 
-## Customize animation:
+## Customize movement:
 
 ```html
-<slider animation="vertical">
+<slider movement="vertical">
   <!-- "vertical" and "horizontal"... "horizontal" is default -->
+  <slide>
+    <h2>I'll move to the top!</h2>
+  </slide>
+  <slide>
+    <h2>Shooting stars</h2>
+  </slide>
+  <slide>
+    <h2>:)</h2>
+  </slide>
+</slider>
+```
+
+## Customize direction:
+
+```html
+<slider direction="backward">
+  <!-- "forward" is default -->
   <slide>
     <h2>I'll move to the right!</h2>
   </slide>
@@ -123,6 +140,22 @@ To individual slide showtime set:
   </slide>
   <slide>
     <h2>With you?</h2>
+  </slide>
+</slider>
+```
+## Customize curve
+
+```html
+<slider curve="cubic-bezier(1, 0, 0, 1)">
+  <!-- Your animation style -->
+  <slide>
+    <h2>JS</h2>
+  </slide>
+  <slide>
+    <h2>CSS</h2>
+  </slide>
+  <slide>
+    <h2>HTML</h2>
   </slide>
 </slider>
 ```
