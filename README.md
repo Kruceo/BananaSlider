@@ -143,7 +143,7 @@ To individual slide showtime set:
   </slide>
 </slider>
 ```
-## Customize curve
+## Customize curve:
 
 ```html
 <slider curve="cubic-bezier(1, 0, 0, 1)">

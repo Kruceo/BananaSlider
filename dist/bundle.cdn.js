@@ -2,9 +2,11 @@ let threads = [];
 let animationSpeed = 500;
 let cooldown = 200;
 let hover = "stop";
-let animation = "left";
+let movement = "left";
 let initial = 0;
 let banana = [];
+let animationCurve = "";
+let direction = "forward";
 const evt = new Event("show");
 function initAllSliders() {
   banana = [];
@@ -26,9 +28,10 @@ async function startSlider(yourSlider) {
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
   hover = slider.getAttribute("hover") ?? "stop";
-  animation = slider.getAttribute("animation") ?? "horizontal";
+  movement = slider.getAttribute("movement") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
-
+  animationCurve = slider.getAttribute("curve")??'cubic-bezier(0.075, 0.82, 0.165, 1)';
+  direction = slider.getAttribute("direction")??"forward";
   if (!slider.querySelector("slider-frame")) {
     slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
   }
@@ -59,7 +62,7 @@ async function startSlider(yourSlider) {
   slider.style.setProperty("overflow", "hidden");
   slider.style.setProperty("display", "block");
 
-  switch (animation) {
+  switch (movement) {
     case "horizontal":
       frame.style =
         "position: relative;left: 0%;display: grid;grid-auto-flow: column;grid-auto-columns: 1fr;--total-items:" +
@@ -68,46 +71,51 @@ async function startSlider(yourSlider) {
         initial +
         ";--speed: " +
         animationSpeed +
-        "ms;left: calc(var(--index)*-100%);transition: left var(--speed)";
+        "ms;left: calc(var(--index)*-100%);transition: left var(--speed) "+animationCurve;
       break;
     case "vertical":
-      slider.style.setProperty("height", "20px");
+      slider.style.setProperty("height", itens.sort((a,b)=>a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight *1.5 + 'px' );
+      itens.forEach((item)=>item.style.setProperty("height", itens.sort((a,b)=>a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight*1.5 + 'px' ));
       frame.style =
         "position: relative;top: 0%;display: flex;flex-direction: column;grid-auto-row: 1fr;--total-items:" +
         itens.length +
-        ";height: calc(var(--total-items) * 100%);--index: " +
-        initial +
-        ";--speed: " +
-        animationSpeed +
-        "ms;top: calc(var(--index) * -100%);transition: top var(--speed)";
+        ";--coef: 0"+
+        ";height: calc(var(--total-items) * 100%)"+
+        ";--index: " + initial +
+        ";--speed: " + animationSpeed +
+        ";ms;top: calc(var(--index)*-100%)"+
+        ";transition: top var(--speed) "+animationCurve;
       break;
   }
   if (cooldown > 0) {
     threads[threads.length] = setLoop(() => {
-      threads[threads.length - 1].delay =
-        itens[index].getAttribute("cooldown") ?? cooldown;
+      threads[threads.length - 1].delay = itens[index].getAttribute("cooldown") ?? cooldown;
       itens[index].dispatchEvent(evt);
-
       frame.style.setProperty("--index", index);
-      index++;
+      if(direction == 'backward')index--;
+      else {index++;}
       if (index > max - 1) {
         index = 0;
+      }if (index > max - 1) {
+        index = 0;
+      }
+      if(index < 0)
+      {
+        index = max - 1;
       }
     }, itens[index].getAttribute("cooldown") ?? cooldown);
   }
   let currentIndex = 0;
   switch (hover) {
     case "stop":
-      slider.addEventListener(
-        "mouseover",
+      slider.addEventListener("mouseover",
         function (event) {
           currentIndex = frame.style.getPropertyValue("--index");
           frame.style.setProperty("--speed", "100000s");
         },
         true
       );
-      slider.addEventListener(
-        "mouseout",
+      slider.addEventListener("mouseout",
         function (event) {
           index = Number.parseInt(currentIndex);
           currentIndex = 0;
