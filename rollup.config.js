@@ -27,7 +27,18 @@ const genTsMod = (target) => {
     },
   };
 };
-
+const minify = (target) => {
+  return {
+    name: "minify",
+    renderChunk(code, chunk, options) {
+      setTimeout(() => {
+        let file = code.toString();
+        file = file.replaceAll('\n','').replaceAll('  ','');
+        fs.writeFileSync(target.file.replace('@@@',options.format),file)
+      }, 100);
+    },
+  };
+};
 export default {
   input: "src/index.js",
   output: [
@@ -41,5 +52,5 @@ export default {
     },
     
   ],
-  plugins: [browserify({ file: "dist/bundle.cdn.js" }),genTsMod({ file: "dist/bundle.cjs.d.ts" })],
+  plugins: [browserify({ file: "dist/bundle.cdn.js" }),genTsMod({ file: "dist/bundle.cjs.d.ts" }),minify({file: "dist/bundle.min.@@@.js"})],
 };
