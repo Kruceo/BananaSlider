@@ -7,7 +7,6 @@ let initial = 0;
 let banana = [];
 let animationCurve = "";
 let direction = "forward";
-let coef = 0;
 const evt = new Event("show");
 function initAllSliders() {
   banana = [];
@@ -19,7 +18,7 @@ function initAllSliders() {
     }
   } else {
     console.warn(
-      "[banana-slider] No sliders here!\nIf you need help try check banana.kruceo.com\nCase you don't like this message, add banana.mess = false"
+      "[banana-slider] No sliders here!\nMay you need help try check banana.kruceo.com\nCase you don't like this message, add banana.mess = false"
     );
   }
 }
