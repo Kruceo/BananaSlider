@@ -1,6 +1,6 @@
 # BananaSlider
 
-## To init:
+## To start:
 
 ```html
 <body>
