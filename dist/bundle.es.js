@@ -1,11 +1,5 @@
-let animationSpeed = 500;
-let cooldown = 200;
-let hover = "stop";
-let movement = "left";
-let initial = 0;
-let banana = new Map();
-let animationCurve = "";
-let direction = "forward";
+let banana = [];
+
 const evt = new Event("show");
 function initAllSliders() {
   stopAllSliders();
@@ -13,8 +7,8 @@ function initAllSliders() {
   const sliderList = document.querySelectorAll("slider");
   if (sliderList.length > 0) {
     for (var slider of sliderList) {
-      let thread = startSlider(slider);
-      registerSlider(slider, thread);
+      startSlider(slider);
+     
     }
   } else {
     console.warn(
@@ -24,6 +18,15 @@ function initAllSliders() {
 }
 
 function startSlider(yourSlider) {
+  let animationSpeed = 500;
+  let cooldown = 200;
+  let hover = "stop";
+  let movement = "left";
+  let initial = 0;
+  
+  let animationCurve = "";
+  let direction = "forward";
+
   let slider = yourSlider;
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
@@ -87,10 +90,11 @@ function startSlider(yourSlider) {
         ";transition: top var(--speed) "+animationCurve;
       break;
   }
-  let loop;
+  let loop = {};
   if (cooldown > 0) {
       loop = setLoop(() => {
       loop.delay = itens[index].getAttribute("cooldown") ?? cooldown;
+        console.log(itens[index]);
       itens[index].dispatchEvent(evt);
       frame.style.setProperty("--index", index);
       if(direction == 'backward')index--;
@@ -104,7 +108,7 @@ function startSlider(yourSlider) {
       {
         index = max - 1;
       }
-    }, itens[index].getAttribute("cooldown") ?? cooldown);
+    }, itens[index].getAttribute("cooldown")??cooldown);
   }
   let currentIndex = 0;
   switch (hover) {
@@ -130,7 +134,7 @@ function startSlider(yourSlider) {
       );
       break;
   }
-  return loop;
+  registerSlider(slider, loop);
 }
 
 function registerSlider(element, thread) {
