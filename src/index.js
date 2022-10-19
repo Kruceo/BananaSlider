@@ -170,7 +170,7 @@ export function stopAllSliders() {
   })
 
 }
-export function restartAllExistentSliders() {
+export function restartAllSliders() {
  // console.log("restart all")
   const keys = Object.keys(banana)
   keys.forEach((each)=>

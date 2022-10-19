@@ -1,6 +1,6 @@
 # BananaSlider
 
-## To start:
+## To start
 
 ```html
 <body>
@@ -12,7 +12,7 @@
 </body>
 ```
 
-## Your first step:
+## Your first step
 
 ```html
 <slider>
@@ -28,7 +28,7 @@
 </slider>
 ```
 
-## Customize showtime:
+## Customize showtime
 
 ```html
 <slider cooldown="5000">
@@ -79,7 +79,7 @@ To individual slide showtime set:
 </slider>
 ```
 
-## Customize animation speed:
+## Customize animation speed
 
 ```html
 <slider speed="250">
@@ -96,7 +96,7 @@ To individual slide showtime set:
 </slider>
 ```
 
-## Customize hover action:
+## Customize hover action
 
 ```html
 <slider hover="add">
@@ -110,7 +110,7 @@ To individual slide showtime set:
 </slider>
 ```
 
-## Customize movement:
+## Customize movement
 
 ```html
 <slider movement="vertical">
@@ -127,7 +127,7 @@ To individual slide showtime set:
 </slider>
 ```
 
-## Customize direction:
+## Customize direction
 
 ```html
 <slider direction="backward">
@@ -143,7 +143,8 @@ To individual slide showtime set:
   </slide>
 </slider>
 ```
-## Customize curve:
+
+## Customize curve
 
 ```html
 <slider curve="cubic-bezier(1, 0, 0, 1)">
@@ -160,7 +161,7 @@ To individual slide showtime set:
 </slider>
 ```
 
-## Customize initial slide:
+## Customize initial slide
 
 ```html
 <slider initial="1">
@@ -182,9 +183,9 @@ To individual slide showtime set:
 All sliders are initialized on window load and indexed on "banana" object with your id attribute name, and you can find your slider calling the object "banana"...
 <br/>
 
-###### PS: If you don't give a id to your slide is set the default name and you can reach it like any other, the name is set like "slider1", "slider2"...
+###### PS: If you don't give a id to your slide is set the ###### default name and you can reach it like any other, the ###### name is set like "slider1", "slider2"
 
-##### Write your slider like you prefer and give a id attribute...
+##### Write your slider like you prefer and give a id attribute
 
 ```html
 <slider id="my-slider">
@@ -224,7 +225,9 @@ tp is acronym to "teleport" and do exactly this, a example:
 <button onClick="banana['my-slider'].tp(2)">3</button>
 <button onClick="banana['my-slider'].tp(3)">4</button>
 ```
+
 ### What is getIndex?
+
 the getIndex function return the current slide that's showing:
 
 ```js
@@ -234,7 +237,40 @@ setInterval(()=>
   console.log(i)
 },1000)
 ```
-## Using the show event:
+
+### How to stop an slider?
+
+If you want stop a single and specific slider, you can do:
+
+```js
+banana['my-slider'].thread.stop();
+```
+
+### How to start an slider?
+
+If you want start a single and specific slider, you can do:
+
+```js
+banana['my-slider'].thread.start();
+```
+
+## What is stopAllSliders?
+
+Stop all sliders that are running, this does not delete the slider, if you restart the slider it will start at the index it stopped
+
+```html
+<button onclick="stopAllSLiders()">Stop</button>;
+```
+
+## What is restartAllSliders?
+
+It just restart all slider that is stopped, it doesn't regenerate the slider, this will start the slider at the last index it showed
+
+```html
+<button onclick="restartAllSliders()">Restart</button>;
+```
+
+## Using the show event
 
 The most basic use of the event is with the attribute "onShow":
 
@@ -252,14 +288,13 @@ The most basic use of the event is with the attribute "onShow":
 </slider>
 ```
 
-Now set a id to any slide, like this:
+You can set the show event like this:
 
 ```html
 <slide id='slide1'>
     <h2>Print anything</h2>
 </slide>
 ```
-In your javascript file or tag, use:
 
 ```javascript
 document.querySelector("#slide1").addEventListener('show',(e)=>
