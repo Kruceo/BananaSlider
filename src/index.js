@@ -97,7 +97,6 @@ export function startSlider(yourSlider) {
   if (cooldown > 0) {
       loop = setLoop(() => {
       loop.delay = itens[index].getAttribute("cooldown") ?? cooldown;
-        console.log(itens[index]);
       itens[index].dispatchEvent(evt);
       frame.style.setProperty("--index", index);
       if(direction == 'backward')index--;
