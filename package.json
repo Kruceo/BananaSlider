@@ -17,8 +17,8 @@
   "label"],
   "exports":{
     ".":{
-      "require":"./dist/bundle.es.js",
-      "import":"./dist/bundle.cjs.js"
+      "require":"./dist/bundle.cjs.js",
+      "import":"./dist/bundle.es.js"
     }
   },
   "author":"kruceo",
