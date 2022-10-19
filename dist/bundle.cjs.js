@@ -2,17 +2,17 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-let threads = [];
 let animationSpeed = 500;
 let cooldown = 200;
 let hover = "stop";
 let movement = "left";
 let initial = 0;
-exports.banana = [];
+exports.banana = new Map();
 let animationCurve = "";
 let direction = "forward";
 const evt = new Event("show");
 function initAllSliders() {
+  stopAllSliders();
   exports.banana = [];
   const sliderList = document.querySelectorAll("slider");
   if (sliderList.length > 0) {
@@ -27,7 +27,7 @@ function initAllSliders() {
   }
 }
 
-async function startSlider(yourSlider) {
+function startSlider(yourSlider) {
   let slider = yourSlider;
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
@@ -91,9 +91,10 @@ async function startSlider(yourSlider) {
         ";transition: top var(--speed) "+animationCurve;
       break;
   }
+  let loop;
   if (cooldown > 0) {
-    threads[threads.length] = setLoop(() => {
-      threads[threads.length - 1].delay = itens[index].getAttribute("cooldown") ?? cooldown;
+      loop = setLoop(() => {
+      loop.delay = itens[index].getAttribute("cooldown") ?? cooldown;
       itens[index].dispatchEvent(evt);
       frame.style.setProperty("--index", index);
       if(direction == 'backward')index--;
@@ -112,25 +113,11 @@ async function startSlider(yourSlider) {
   let currentIndex = 0;
   switch (hover) {
     case "stop":
-      slider.addEventListener("mouseover",
-        function (event) {
-          currentIndex = frame.style.getPropertyValue("--index");
-          frame.style.setProperty("--speed", "100000s");
-        },
-        true
-      );
-      slider.addEventListener("mouseout",
-        function (event) {
-          index = Number.parseInt(currentIndex);
-          currentIndex = 0;
-          frame.style.setProperty("--speed", animationSpeed + "ms");
-        },
-        true
-      );
+      slider.addEventListener("mouseover",()=>loop.stop());
+      slider.addEventListener("mouseout" ,()=>loop.start());
       break;
     case "add":
       currentIndex = frame.style.getPropertyValue("--index");
-
       slider.addEventListener(
         "mouseover",
         function (event) {
@@ -147,7 +134,7 @@ async function startSlider(yourSlider) {
       );
       break;
   }
-  return threads[threads.length - 1];
+  return loop;
 }
 
 function registerSlider(element, thread) {
@@ -171,6 +158,26 @@ function registerSlider(element, thread) {
   };
 }
 
+function stopAllSliders() {
+  //console.log("stop all")
+  const keys = Object.keys(exports.banana);
+  keys.forEach((each)=>
+  {
+    exports.banana[each].thread.stop();
+    //console.log(banana[each].name +" stopped" )
+  });
+
+}
+function restartAllSliders() {
+ // console.log("restart all")
+  const keys = Object.keys(exports.banana);
+  keys.forEach((each)=>
+  {
+    exports.banana[each].thread.start();
+    //console.log(banana[each].name +" restarted" )
+  });
+
+}
 async function moveSlider(yourSliderId, value) {
   const slider = yourSliderId.getElementsByTagName("slider-frame")[0];
   const max = Number.parseInt(slider.style.getPropertyValue("--total-items"));
@@ -208,6 +215,7 @@ function setLoop(func, initialDelay) {
   let thisLoop = {
     delay: initialDelay,
     start: () => {
+      thisLoop.stopped = false;
       setTimeout(() => {
         if (!thisLoop.stopped) {
           func();
@@ -226,4 +234,8 @@ function setLoop(func, initialDelay) {
 }
 
 exports.initAllSliders = initAllSliders;
+exports.registerSlider = registerSlider;
+exports.restartAllSliders = restartAllSliders;
 exports.setLoop = setLoop;
+exports.startSlider = startSlider;
+exports.stopAllSliders = stopAllSliders;
