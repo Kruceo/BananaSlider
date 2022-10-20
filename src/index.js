@@ -27,14 +27,14 @@ export function startSlider(yourSlider) {
   
   let animationCurve = "";
   let direction = "forward";
-
+  
   let slider = yourSlider;
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
   hover = slider.getAttribute("hover") ?? "stop";
   movement = slider.getAttribute("movement") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
-  animationCurve = slider.getAttribute("curve")??'cubic-bezier(0.075, 0.82, 0.165, 1)'
+  animationCurve = slider.getAttribute("curve")??'cubic-bezier(.49,.07,.57,.94)'
   direction = slider.getAttribute("direction")??"forward"
   if (!slider.querySelector("slider-frame")) {
     slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
