@@ -4,7 +4,9 @@ export function initAllSliders(): void;
 export function registerSlider(element: any, thread: any): void;
 export function restartAllSliders(): void;
 export function setLoop(func: any, initialDelay: any): {
+    name: string;
     delay: any;
+    timeout: any;
     start: () => void;
     stopped: boolean;
     stop: () => void;
