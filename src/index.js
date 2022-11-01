@@ -8,8 +8,8 @@ function initAllSliders() {
   const sliderList = document.querySelectorAll("slider");
   if (sliderList.length > 0) {
     for (var slider of sliderList) {
-      const thread = startSlider(slider);
-     
+      startSlider(slider);
+
     }
   } else {
     console.warn(
@@ -24,18 +24,18 @@ export function startSlider(yourSlider) {
   let hover = "stop";
   let movement = "left";
   let initial = 0;
-  
+
   let animationCurve = "";
   let direction = "forward";
-  
+
   let slider = yourSlider;
   cooldown = slider.getAttribute("cooldown") ?? 2000;
   animationSpeed = slider.getAttribute("speed") ?? 500;
   hover = slider.getAttribute("hover") ?? "stop";
   movement = slider.getAttribute("movement") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
-  animationCurve = slider.getAttribute("curve")??'cubic-bezier(.49,.07,.57,.94)'
-  direction = slider.getAttribute("direction")??"forward"
+  animationCurve = slider.getAttribute("curve") ?? 'cubic-bezier(.49,.07,.57,.94)'
+  direction = slider.getAttribute("direction") ?? "forward"
   if (!slider.querySelector("slider-frame")) {
     slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
   }
@@ -50,11 +50,11 @@ export function startSlider(yourSlider) {
         } catch (error) {
           console.error(
             "[banana-slider] " +
-              e.target.localName +
-              " - " +
-              e.target.id +
-              " Slider onShow attribute error \n" +
-              error
+            e.target.localName +
+            " - " +
+            e.target.id +
+            " Slider onShow attribute error \n" +
+            error
           );
         }
       });
@@ -75,48 +75,46 @@ export function startSlider(yourSlider) {
         initial +
         ";--speed: " +
         animationSpeed +
-        "ms;left: calc(var(--index)*-100%);transition: left var(--speed) "+animationCurve;
+        "ms;left: calc(var(--index)*-100%);transition: left var(--speed) " + animationCurve;
       break;
     case "vertical":
-      slider.style.setProperty("height", itens.sort((a,b)=>a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight *1.5 + 'px' );
-      itens.forEach((item)=>item.style.setProperty("height", itens.sort((a,b)=>a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight*1.5 + 'px' ));
+      slider.style.setProperty("height", itens.sort((a, b) => a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight * 1.5 + 'px');
+      itens.forEach((item) => item.style.setProperty("height", itens.sort((a, b) => a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight * 1.5 + 'px'));
       frame.style =
         "position: relative;top: 0%;display: flex;flex-direction: column;grid-auto-row: 1fr;--total-items:" +
         itens.length +
-        ";--coef: 0"+
-        ";height: calc(var(--total-items) * 100%)"+
+        ";--coef: 0" +
+        ";height: calc(var(--total-items) * 100%)" +
         ";--index: " + initial +
         ";--speed: " + animationSpeed +
-        ";ms;top: calc(var(--index)*-100%)"+
-        ";transition: top var(--speed) "+animationCurve;
+        ";ms;top: calc(var(--index)*-100%)" +
+        ";transition: top var(--speed) " + animationCurve;
       break;
     default:
       break;
   }
   let loop = {};
   if (cooldown > 0) {
-      loop = setLoop(() => {
+    loop = setLoop(() => {
       loop.delay = itens[index].getAttribute("cooldown") ?? cooldown;
       itens[index].dispatchEvent(evt);
       frame.style.setProperty("--index", index);
-      if(direction == 'backward')index--;
-      else{index++}
+      if (direction == 'backward') index--;
+      else { index++ }
       if (index > max - 1) {
         index = 0;
-      }if (index > max - 1) {
-        index = 0;
       }
-      if(index < 0)
-      {
+      if (index < 0) {
         index = max - 1;
       }
-    }, itens[index].getAttribute("cooldown")??cooldown);
+      console.log(index)
+    }, itens[index].getAttribute("cooldown") ?? cooldown);
   }
   let currentIndex = 0;
   switch (hover) {
     case "stop":
-      slider.addEventListener("mouseover",()=>loop.stop());
-      slider.addEventListener("mouseout" ,()=>loop.start());
+      slider.addEventListener("mouseover", () => loop.stop());
+      slider.addEventListener("mouseout", () => loop.start());
       break;
     case "add":
       currentIndex = frame.style.getPropertyValue("--index");
@@ -166,18 +164,16 @@ export function registerSlider(element, thread) {
 export function stopAllSliders() {
   //console.log("stop all")
   const keys = Object.keys(banana)
-  keys.forEach((each)=>
-  {
+  keys.forEach((each) => {
     banana[each].thread.stop()
     //console.log(banana[each].name +" stopped" )
   })
 
 }
 export function restartAllSliders() {
- // console.log("restart all")
+  // console.log("restart all")
   const keys = Object.keys(banana)
-  keys.forEach((each)=>
-  {
+  keys.forEach((each) => {
     banana[each].thread.start();
     //console.log(banana[each].name +" restarted" )
   })
@@ -223,20 +219,28 @@ async function deleteSlider(yourSliderId) {
 }
 export function setLoop(func, initialDelay) {
   let thisLoop = {
+    name:"#"+(Math.random()*500).toFixed(0),
     delay: initialDelay,
+    timeout: null,
     start: () => {
-      thisLoop.stopped = false;
-      setTimeout(() => {
+      
+      clearTimeout(thisLoop.timeout);
+      thisLoop.timeout = setTimeout(() => {
         if (!thisLoop.stopped) {
+         
           func();
           thisLoop.start(thisLoop.delay);
-          return;
+          
         }
+       
+        
       }, thisLoop.delay);
+      thisLoop.stopped = false;
     },
     stopped: false,
     stop: () => {
       thisLoop.stopped = true;
+      
     },
   };
   thisLoop.start();
