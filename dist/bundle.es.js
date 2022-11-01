@@ -26,6 +26,7 @@ function startSlider(yourSlider) {
 
   let animationCurve = "";
   let direction = "forward";
+  let fade = false;
 
   let slider = yourSlider;
   cooldown = slider.getAttribute("cooldown") ?? 2000;
@@ -34,6 +35,7 @@ function startSlider(yourSlider) {
   movement = slider.getAttribute("movement") ?? "horizontal";
   initial = slider.getAttribute("initial") ?? 0;
   animationCurve = slider.getAttribute("curve") ?? 'cubic-bezier(.49,.07,.57,.94)';
+  fade = slider.getAttribute('fade')??false;
   direction = slider.getAttribute("direction") ?? "forward";
   if (!slider.querySelector("slider-frame")) {
     slider.innerHTML = "<slider-frame>" + slider.innerHTML + "</slider-frame>";
@@ -77,7 +79,7 @@ function startSlider(yourSlider) {
         "ms;left: calc(var(--index)*-100%);transition: left var(--speed) " + animationCurve;
       break;
     case "vertical":
-      slider.style.setProperty("height", itens.sort((a, b) => a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight * 1.5 + 'px');
+      slider.style.setProperty("height", itens.sort((a, b) => a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight * 1 + 'px');
       itens.forEach((item) => item.style.setProperty("height", itens.sort((a, b) => a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight * 1.5 + 'px'));
       frame.style =
         "position: relative;top: 0%;display: flex;flex-direction: column;grid-auto-row: 1fr;--total-items:" +
@@ -86,25 +88,43 @@ function startSlider(yourSlider) {
         ";height: calc(var(--total-items) * 100%)" +
         ";--index: " + initial +
         ";--speed: " + animationSpeed +
-        ";ms;top: calc(var(--index)*-100%)" +
-        ";transition: top var(--speed) " + animationCurve;
+        "ms;top: calc(var(--index)*-100%)" +
+      ";transition: top var(--speed)" + animationCurve;
       break;
   }
+
+  itens.forEach(element => {
+    element.style.transition = 'opacity '+animationSpeed + 'ms';
+  });
   let loop = {};
   if (cooldown > 0) {
     loop = setLoop(() => {
       loop.delay = itens[index].getAttribute("cooldown") ?? cooldown;
       itens[index].dispatchEvent(evt);
+      if(fade != false){
+      itens.forEach((element,i) => {
+        if(i!=index)
+        {
+          element.style.opacity = 0;
+        }
+        else
+        {
+          element.style.opacity = 1;
+        }
+      });}
+
       frame.style.setProperty("--index", index);
+
       if (direction == 'backward') index--;
       else { index++; }
+
       if (index > max - 1) {
         index = 0;
       }
       if (index < 0) {
         index = max - 1;
       }
-      console.log(index);
+      
     }, itens[index].getAttribute("cooldown") ?? cooldown);
   }
   let currentIndex = 0;
