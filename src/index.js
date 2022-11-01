@@ -115,16 +115,19 @@ export function startSlider(yourSlider) {
           element.style.opacity = 1
         }
       });}
+
       frame.style.setProperty("--index", index);
+
       if (direction == 'backward') index--;
       else { index++ }
+
       if (index > max - 1) {
         index = 0;
       }
       if (index < 0) {
         index = max - 1;
       }
-      console.log(index)
+      
     }, itens[index].getAttribute("cooldown") ?? cooldown);
   }
   let currentIndex = 0;

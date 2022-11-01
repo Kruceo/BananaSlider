@@ -15,5 +15,5 @@
 * start reformuled | slider object ==> documented
 * restartAllSlider function ==> documented
 * stopAllSlider function ==> documented
-
+* fade ==> not documented
 ## version 0.10.X
