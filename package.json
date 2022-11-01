@@ -1,6 +1,6 @@
 {
   "name":"bananaslider",
-  "version":"0.9.1",
+  "version":"0.9.2",
   "main":"src/index.js",
   "description":"Simple JS slider",
   "scripts":{
