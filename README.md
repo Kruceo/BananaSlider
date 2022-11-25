@@ -1,20 +1,34 @@
 # BananaSlider
-## Summary
+
+<br>
+<div align='center'>
+<img src="./icon.png" width=128px>
+
+
+<a href="https://banana.kruceo.com">📚 <strong>Example</strong></a> ╽
+<a href="https://home.kruceo.com">🧒🏼 <strong>Author</strong></a> ╽
+<a href="https://home.kruceo.com/donation">🎁 <strong>Donation</strong></a>
+</div>
+<br>
+<br>
+
+
+# Summary
 
 1. [Introduction](#introduction)
 1. [Installation](#installation)
 1. [Technologies](#technologies)
 1. [Bundles](#bundles)
 1. [Getting Started](#getting-started)
-1. [Customize](#how-to-customize)
+1. [HTML Directives](#html-directives)
     1. [Showtime](#showtime)
     2. [Animation Speed](#animation-speed)
     3. [Animation Direction](#animation-direction)
     4. [Animation Curve](#animation-curve)
     5. [Animation Movement](#animation-movement)
-    6. [Hover presets](#hover-action)
+    6. [Hover Presets](#hover-action)
     7. [Initial Slide](#initial-slide)
-3. [Control](#take-control-of-sliders)
+3. [JavaScript API](#javascript-api)
     1. [move](#move-function)
     1. [Teleport (tp)](#tp-function)
     1. [getIndex](#getindex-function)
@@ -23,24 +37,24 @@
     1. [stopAllSliders](#stopallsliders-function)
     1. [restartAllSliders](#restartallsliders-function)
 
-## Introduction
+# Introduction
 
 BananaSlider was created to make creating carousels simpler, faster and more intuitive, while still being very customizable.
 
-## Technologies
+# Technologies
 
 * **Javascript** for internal mechanics;
 * **HTML** as main structure;
 * **CSS** for visual enhancement;
 
-## Bundles
+# Bundles
 
 * EcmaScript (ES);
 * CommonJS (CJS);
 * TypeScript (TS);
 * Content delivery network (CDN);
 
-## Installation
+# Installation
 
 ```console
 npm install kruceo/bananaslider
@@ -54,6 +68,7 @@ for CDN method use:
 
 
 <br><br><br><br>
+
 # Getting started
 
 ## Your first slider
@@ -77,7 +92,8 @@ for CDN method use:
 </script>
 ```
 <br><br>
-# How to customize
+# HTML Directives
+This section show some ways to customize sliders with HTML 
 ## Showtime
 
 ```html
@@ -230,7 +246,7 @@ To individual slide showtime set:
 </slider>
 ```
 <br><br>
-# Take control of sliders
+# JavaScript API
 
 All sliders are initialized on window load and indexed on "banana" object with your id attribute name, and you can find your slider calling the object "banana"...
 <br> 
