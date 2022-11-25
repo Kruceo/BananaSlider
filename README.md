@@ -2,7 +2,7 @@
 ## Summary
 
 1. [Introduction](#introduction)
-1. [Instalation](#instalation)
+1. [Installation](#installation)
 1. [Technologies](#technologies)
 1. [Bundles](#bundles)
 1. [Getting Started](#getting-started)
@@ -37,10 +37,10 @@ BananaSlider was created to make creating carousels simpler, faster and more int
 
 * EcmaScript (ES);
 * CommonJS (CJS);
-* TypeScript (TS)
+* TypeScript (TS);
 * Content delivery network (CDN);
 
-## Instalation
+## Installation
 
 ```console
 npm install kruceo/bananaslider
