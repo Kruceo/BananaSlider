@@ -76,7 +76,7 @@ function startSlider(yourSlider) {
         initial +
         ";--speed: " +
         animationSpeed +
-        "ms;left: calc(var(--index)*-100%);transition: left var(--speed) " + animationCurve + ";height:100%;width:100%;";
+        "ms;left: calc(var(--index)*-100%);transition: left var(--speed) " + animationCurve + ";height:100%;width:"+itens.length*100+"%;";
       break;
     case "vertical":
       slider.style.setProperty("height", itens.sort((a, b) => a.offsetHeight - b.offsetHeight)[itens.length - 1].offsetHeight * 1 + 'px');
@@ -89,7 +89,7 @@ function startSlider(yourSlider) {
         ";--index: " + initial +
         ";--speed: " + animationSpeed +
         "ms;top: calc(var(--index)*-100%)" +
-      ";transition: top var(--speed)" + animationCurve + ";height:100%;width:100%;";
+      ";transition: top var(--speed)" + animationCurve + ";height:"+itens.length*100+";width:100%;";
       break;
   }
 
